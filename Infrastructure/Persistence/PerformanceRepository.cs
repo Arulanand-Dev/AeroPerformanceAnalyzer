@@ -38,21 +38,6 @@ namespace AeroMetrics.Infrastructure.Persistence
             }
         }
 
-        public async Task<List<TelemetryData>> GetTelemetryDataByChannelAsync(int channel)
-        {
-            try
-            {
-                return await _dbContext.TelemetryData
-                    .Where(telemetry => telemetry.Channel == channel)
-                    .OrderBy(telemetry => telemetry.Time)
-                    .ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException($"An error occurred while retrieving telemetry data for channel {channel}.", ex);
-            }
-        }
-
         public async Task ClearTelemetryDataAsync()
         {
             try
