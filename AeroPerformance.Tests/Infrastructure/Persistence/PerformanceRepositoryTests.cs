@@ -58,25 +58,6 @@ namespace AeroMetrics.Tests.Infrastructure.Persistence
         }
 
         [Fact]
-        public async Task GetTelemetryDataByChannelAsync_ValidChannel_ShouldReturnData()
-        {
-            // Arrange
-            var telemetryData = new List<TelemetryData>
-            {
-                new TelemetryData { Time = 1.0, Value = 1.0, Channel = 3, Outing = 1 },
-                new TelemetryData { Time = 2.0, Value = 2.0, Channel = 4, Outing = 1 }
-            };
-            await _repository.AddTelemetryDataAsync(telemetryData);
-
-            // Act
-            var result = await _repository.GetTelemetryDataByChannelAsync(3);
-
-            // Assert
-            Assert.Single(result);
-            Assert.Equal(1.0, result.First().Time);
-        }
-
-        [Fact]
         public async Task ClearTelemetryDataAsync_ShouldRemoveAllData()
         {
             // Arrange

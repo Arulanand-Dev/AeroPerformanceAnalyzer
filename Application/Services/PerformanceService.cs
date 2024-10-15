@@ -27,6 +27,7 @@ namespace AeroMetrics.Application.Services
                     throw new NoTelemetryDataException("No telemetry data to store.");
                 }
 
+                //Calculate the Channel 7 while storing itself to improve performance while querying
                 var channel7 = CalculateChannel7(telemetryData);
                 telemetryData.AddRange(channel7);
 
@@ -52,7 +53,7 @@ namespace AeroMetrics.Application.Services
             {
                 var telemetryData = await FetchTelemetryData();
                 if (!telemetryData.Any()) return new List<AnalyzeTelemetryDataResult>();
-
+                //fetch the data related to the Channel 2 and Channel 7. Group it by Time for Dashboard
                 return telemetryData
                     .Where(t => t.Channel == 2 || t.Channel == 7)
                     .OrderBy(t => t.Time)
@@ -69,38 +70,17 @@ namespace AeroMetrics.Application.Services
             }
         }
 
-        public async Task<ConditionResult> GetTimeByConditionAsync(int channel, string condition, double value)
-        {
-            if (string.IsNullOrEmpty(condition)) throw new ArgumentNullException(nameof(condition), "Condition cannot be null or empty.");
-            if (channel < 1) throw new ArgumentException("Invalid channel number.");
-
-            var result = new ConditionResult { Condition = condition, Channel = channel };
-
-            try
-            {
-                var telemetryData = await _performanceRepository.GetTelemetryDataByChannelAsync(channel);
-                if (!telemetryData.Any()) return result;
-
-                result.Time = EvaluateCondition(telemetryData, condition, value);
-                return result;
-            }
-            catch (InvalidConditionException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw new TelemetryDataRetrievalException("An error occurred while retrieving time by condition.", ex);
-            }
-        }
-
         public async Task<DefaultConditionResult> GetTimesForDefaultConditionAsync()
         {
             try
             {
                 var telemetryData = await FetchTelemetryData();
                 if (!telemetryData.Any()) return new DefaultConditionResult();
-
+                
+                //Calculate and return the Required Condition times
+                //Channel 2 < -0.5
+                //Channel 7 < 0,
+                //both
                 return CalculateConditionTimes(telemetryData);
             }
             catch (Exception ex)
@@ -143,19 +123,6 @@ namespace AeroMetrics.Application.Services
                 .ToList();
 
               return channel7;
-        }
-
-        private double EvaluateCondition(List<TelemetryData> telemetryData, string condition, double value)
-        {
-            return condition switch
-            {
-                "=" => telemetryData.FirstOrDefault(t => Math.Abs(t.Value - value) < double.Epsilon)?.Time ?? 0.0,
-                ">" => telemetryData.FirstOrDefault(t => t.Value > value)?.Time ?? 0.0,
-                "<" => telemetryData.FirstOrDefault(t => t.Value < value)?.Time ?? 0.0,
-                ">=" => telemetryData.FirstOrDefault(t => t.Value >= value)?.Time ?? 0.0,
-                "<=" => telemetryData.FirstOrDefault(t => t.Value <= value)?.Time ?? 0.0,
-                _ => throw new InvalidConditionException($"Invalid condition '{condition}' specified.")
-            };
         }
 
         private DefaultConditionResult CalculateConditionTimes(List<TelemetryData> telemetryData)
