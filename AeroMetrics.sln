@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroMetrics.Api.Service", "AeroPerformance\AeroMetrics.Api.Service.csproj", "{9545D026-7515-4902-BEC7-608B2F937B18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroMetrics.Application", "Application\AeroMetrics.Application.csproj", "{5BC09059-FEF6-4B4B-BB13-10C87916C994}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroMetrics.Core", "Core\AeroMetrics.Core.csproj", "{010399BF-5FAB-4FEE-AF3D-122D371EF5E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroMetrics.Infrastructure", "Infrastructure\AeroMetrics.Infrastructure.csproj", "{837CA760-718D-43AE-845E-FAA235023198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroMetrics.Tests", "AeroPerformance.Tests\AeroMetrics.Tests.csproj", "{3F0C2AC9-241A-424E-88F5-5B423C85F282}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9545D026-7515-4902-BEC7-608B2F937B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9545D026-7515-4902-BEC7-608B2F937B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9545D026-7515-4902-BEC7-608B2F937B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9545D026-7515-4902-BEC7-608B2F937B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BC09059-FEF6-4B4B-BB13-10C87916C994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BC09059-FEF6-4B4B-BB13-10C87916C994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BC09059-FEF6-4B4B-BB13-10C87916C994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BC09059-FEF6-4B4B-BB13-10C87916C994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010399BF-5FAB-4FEE-AF3D-122D371EF5E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010399BF-5FAB-4FEE-AF3D-122D371EF5E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010399BF-5FAB-4FEE-AF3D-122D371EF5E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010399BF-5FAB-4FEE-AF3D-122D371EF5E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{837CA760-718D-43AE-845E-FAA235023198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837CA760-718D-43AE-845E-FAA235023198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837CA760-718D-43AE-845E-FAA235023198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837CA760-718D-43AE-845E-FAA235023198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F0C2AC9-241A-424E-88F5-5B423C85F282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F0C2AC9-241A-424E-88F5-5B423C85F282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F0C2AC9-241A-424E-88F5-5B423C85F282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F0C2AC9-241A-424E-88F5-5B423C85F282}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A129A0EE-26B9-43DE-8924-7513941AD7B4}
+	EndGlobalSection
+EndGlobal
