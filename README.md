@@ -28,21 +28,21 @@ Before you begin, ensure you have the following installed:
 ## Installation
 
 1. Clone the repository:
-   
+
    `git clone https://github.com/Arulanand-Dev/AeroPerformanceAnalyzerService.git`
 
 2. Navigate to the project directory:
-   
+
    `cd AeroPerformanceAnalyzerService`
 
 3. Restore the project dependencies:
-   
+
    `dotnet restore`
 
 ## Running the Application
 
 1. To run the application in development mode, execute the following command:
-   
+
    `dotnet run`
 
 2. Once the application is running, it will be accessible at `https://localhost:44308`.
@@ -53,4 +53,4 @@ Before you begin, ensure you have the following installed:
 
 - The API documentation can be accessed via Swagger UI at the following URL:
 
-   [Swagger API Documentation](https://aeroperformanceanlayzerservice-d2bretahcsexckgf.canadacentral-01.azurewebsites.net/swagger/index.html)
+  [Swagger API Documentation](https://aeroperformanceanlayzerservice-d2bretahcsexckgf.canadacentral-01.azurewebsites.net/swagger/index.html)
