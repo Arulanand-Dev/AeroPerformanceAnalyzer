@@ -8,6 +8,8 @@ namespace AeroMetrics.Application.Interfaces
 
         Task<List<AnalyzeTelemetryDataResult>> GetTelemetryDataAsync();
 
+        Task<ConditionResult> GetTimeByConditionAsync(
+            int channel, string condition, double value);
         Task<DefaultConditionResult> GetTimesForDefaultConditionAsync();
 
         Task ClearTelemetryDataAsync();

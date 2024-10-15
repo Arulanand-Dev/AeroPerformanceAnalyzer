@@ -6,6 +6,7 @@ namespace AeroMetrics.Infrastructure.Persistence
     {
         Task AddTelemetryDataAsync(List<TelemetryData> telemetryData);
         Task<List<TelemetryData>> GetAllTelemetryDataAsync();
+        Task<List<TelemetryData>> GetTelemetryDataByChannelAsync(int channel);
         Task ClearTelemetryDataAsync();
     }
 }

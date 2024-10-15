@@ -95,6 +95,19 @@ namespace AeroMetrics.Tests.Application.Services
             await Assert.ThrowsAsync<NoTelemetryDataException>(() => _service.StoreTelemetryDataAsync(stream));
         }
 
+        [Fact]
+        public async Task GetTimeByCondition_NonExistentCondition_ShouldThrowInvalidConditionException()
+        {
+            // Arrange
+            _performanceRepositoryMock.Setup(repo => repo.GetTelemetryDataByChannelAsync(It.IsAny<int>()))
+                .ReturnsAsync(new List<TelemetryData>
+                {
+                    new TelemetryData { Time = 1.0, Value = 0.5, Channel = 2 },
+                });
+
+            // Act & Assert
+            await Assert.ThrowsAsync<InvalidConditionException>(() => _service.GetTimeByConditionAsync(2, "INVALID_CONDITION", 0.5));
+        }
 
         [Fact]
         public async Task GetTimesForDefaultConditionAsync_SingleConditionMet_ShouldReturnOnlyFirstConditionTime()
@@ -138,6 +151,30 @@ namespace AeroMetrics.Tests.Application.Services
             Assert.Equal(1.0, result.BothConditionTime);
         }
 
+        [Fact]
+        public async Task GetTimeByCondition_NoMatchingData_ShouldReturnDefaultTime()
+        {
+            // Arrange
+            _performanceRepositoryMock.Setup(repo => repo.GetTelemetryDataByChannelAsync(It.IsAny<int>()))
+                .ReturnsAsync(new List<TelemetryData>());
+
+            // Act
+            var result = await _service.GetTimeByConditionAsync(2, ">", 0.5);
+
+            // Assert
+            Assert.Equal(0.0, result.Time);
+        }
+
+        [Fact]
+        public async Task GetTimeByCondition_WhenChannelIsInvalid_ShouldThrowInvalidChannelException()
+        {
+            // Arrange
+            _performanceRepositoryMock.Setup(repo => repo.GetTelemetryDataByChannelAsync(It.IsAny<int>()))
+                .ReturnsAsync(new List<TelemetryData>());
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetTimeByConditionAsync(-1, ">", 0.5));
+        }
 
         [Fact]
         public async Task ClearTelemetryDataAsync_RepositoryThrowsException_ShouldThrowApplicationException()

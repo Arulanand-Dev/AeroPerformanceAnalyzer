@@ -79,6 +79,32 @@ namespace AeroMetrics.Api.Service.Controllers
         }
 
         /// <summary>
+        /// Retrieves the time for a specific condition on a channel.
+        /// </summary>
+        /// <param name="channel">The channel number.</param>
+        /// <param name="condition">The condition to check (e.g., "=", ">", "<").</param>
+        /// <param name="value">The value to compare against.</param>
+        /// <returns>The time when the condition is met.</returns>
+        [HttpGet("GetTimeByCondition")]
+        public async Task<ActionResult<ConditionResult>> GetTimeByCondition(int channel, string condition, double value)
+        {
+            try
+            {
+                var result = await _performanceService.GetTimeByConditionAsync(channel, condition, value);
+                return new OkObjectResult(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest($"Invalid argument: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details here if logging is implemented
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        /// <summary>
         /// Retrieves the times for default conditions.
         /// </summary>
         /// <returns>The times when default conditions are met.</returns>

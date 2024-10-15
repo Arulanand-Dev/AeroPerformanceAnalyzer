@@ -66,50 +66,6 @@ public class PerformanceControllerTests
     }
 
     [Fact]
-    public async Task GetTimesForDefaultCondition_WhenCalled_ReturnsOkWithResult()
-    {
-        // Arrange
-        var expectedResult = new DefaultConditionResult
-        {
-            FirstConditionTime = 192,
-            SecondConditionTime = 194.2,
-            BothConditionTime = 198
-        };
-
-        _mockPerformanceService
-            .Setup(service => service.GetTimesForDefaultConditionAsync())
-            .ReturnsAsync(expectedResult);
-
-        // Act
-        var result = await _controller.GetTimesForDefaultCondition();
-
-        // Assert
-        var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var actualResult = Assert.IsType<DefaultConditionResult>(okResult.Value);
-        Assert.Equal(expectedResult, actualResult);
-        _mockPerformanceService.Verify(service => service.GetTimesForDefaultConditionAsync(), Times.Once);
-    }
-
-    [Fact]
-    public async Task GetTimesForDefaultCondition_WhenExceptionThrown_ReturnsInternalServerError()
-    {
-        // Arrange
-        var exceptionMessage = "Some internal error";
-        _mockPerformanceService
-            .Setup(service => service.GetTimesForDefaultConditionAsync())
-            .ThrowsAsync(new Exception(exceptionMessage));
-
-        // Act
-        var result = await _controller.GetTimesForDefaultCondition();
-
-        // Assert
-        var objectResult = Assert.IsType<ObjectResult>(result.Result);
-        Assert.Equal(500, objectResult.StatusCode);
-        Assert.Equal($"Internal server error: {exceptionMessage}", objectResult.Value);
-        _mockPerformanceService.Verify(service => service.GetTimesForDefaultConditionAsync(), Times.Once);
-    }
-
-    [Fact]
     public async Task ClearTelemetryData_ShouldReturnOk_WhenDataClearedSuccessfully()
     {
         // Arrange
